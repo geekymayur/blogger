@@ -15,27 +15,34 @@
     <div class="container">
         <h1 class="mb-4">Blogger</h1>
         <a href="/articles/new" class="btn btn-sm btn-success">New Articles</a>
+        <div class="row">
+            <% data.forEach(data=> { %>
+                <div class="col-md-4">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4>
+                                <%= data.title %>
+                            </h4>
+                            <div class="card-subtitle text-muted mb-2">
+                                <%= data.createdAt.toLocaleDateString() %>
 
-        <% data.forEach(data=> { %>
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h4>
-                        <%= data.title %>
-                    </h4>
-                    <div class="card-subtitle text-muted mb-2">
-                        <%= data.createdAt.toLocaleDateString() %>
+                            </div>
+                            <div class="card-text mb-2">
+                                <%= data.description %>
+                            </div>
+                            <a href="articles/<%= data.slug %>" class="btn btn-sm btn-info">Read More</a>
+                            <a href="articles/edit/<%= data.id %>" class="btn btn-sm btn-dark">Edit</a>
 
+                            <form class="d-inline" action="/articles/<%= data.id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger"> Delete</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="card-text mb-2">
-                        <%= data.description %>
-                    </div>
-                    <a href="articles/<%= data.slug %>" class="btn btn-sm btn-info">Read More</a>
-                    <form class="d-inline" action="/articles/<%= data.id %>?_method=DELETE" method="POST">
-                        <button type="submit" class="btn btn-sm btn-danger"> Delete</button>
-                    </form>
                 </div>
-            </div>
-            <% }) %>
+
+                <% }) %>
+        </div>
+
 
 
     </div>
